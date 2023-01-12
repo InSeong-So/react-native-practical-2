@@ -16,3 +16,10 @@ TextField 구성하기
 
 일반적으로 커스텀 컴포넌트는 외부/내부 컨테이너를 결합하여 작성한다.
 - 스타일 객체는 단일 변수 또는 배열로도 지정할 수 있다.
+
+배경색을 일괄적으로 적용하고 싶다면 App.js에서 작성하면 된다. View 컴포넌트에 StyleSheet로 적용할 수도 있지만...
+- 선형 그라데이션을 적용하고 싶다면 Expo에서 만든 expo-linear-gradient 패키지를 사용해보자.
+
+ImageBackground는 전경이 아닌 배경에 이미지를 렌더링한다.
+- 이미지 크기는 resizeMode를 사용한다.
+- ImageBackground도 결국 View와 Image의 조합이다.
