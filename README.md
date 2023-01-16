@@ -23,3 +23,7 @@ TextField 구성하기
 ImageBackground는 전경이 아닌 배경에 이미지를 렌더링한다.
 - 이미지 크기는 resizeMode를 사용한다.
 - ImageBackground도 결국 View와 Image의 조합이다.
+
+경고창은 React-Native가 처리한다.
+- Alert 컴포넌트를 import 해서 사용
+- Alert은 prompt, alert이 존재함. 각 인자는 타이틀, 메세지, 버튼과 그 외 옵션으로 구성된다.
