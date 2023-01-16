@@ -1,20 +1,47 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import NumberContainer from '../components/game/NumberContainer';
+import PrimaryButton from '../components/ui/PrimaryButton';
 import Title from '../components/ui/Title';
 import Colors from '../constants/colors';
+
+let minBoundary = 1;
+let maxBoundary = 100;
 
 export default function GameScreen({ userNumber }) {
   const initialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+  // 이전 숫자보다 작다면 '작아요ㅠ' 라는 문자열
+  // 이전 숫자보다 크다면 '크네요!!' 라는 문자열
+  const nextGuessHandler = (direction) => {
+    if (
+      (direction === '작아요ㅠ' && currentGuess < userNumber) ||
+      (direction === '크네요!!' && currentGuess > userNumber)
+    ) {
+      Alert.alert('거짓말 하지 마세요!', '뭐가 잘못된지 알고 계시겠죠?', [
+        { text: '미안!', style: 'cancel' },
+      ]);
+      return;
+    }
+
+    if (direction === '작아요ㅠ') maxBoundary = currentGuess;
+    if (direction === '크네요!!') minBoundary = currentGuess + 1;
+
+    const nextRandomNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess);
+    setCurrentGuess(nextRandomNumber);
+  };
 
   return (
     <View style={styles.screen}>
       <Title>업 & 다운 숫자 게임</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
       <View>
-        <Text>Game Screen!</Text>
-        {/* <Text>+ -</Text> */}
+        <Text>클까요? 작을까요?</Text>
+        <View>
+          <PrimaryButton onPress={nextGuessHandler.bind(this, '크네요!!')}>+</PrimaryButton>
+          <PrimaryButton onPress={nextGuessHandler.bind(this, '작아요ㅠ')}>-</PrimaryButton>
+        </View>
       </View>
       {/* <View>게임 로그</View> */}
     </View>
