@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import Title from '../components/Title';
+import Colors from '../constants/colors';
 
 export default function GameScreen() {
   return (
@@ -23,10 +24,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#ddb20f',
+    color: Colors.accent500,
     textAlign: 'center',
     borderWidth: 2,
-    borderColor: '#ddb20f',
+    borderColor: Colors.accent500,
     padding: 12,
   },
 });

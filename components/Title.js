@@ -8,10 +8,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#ddb20f',
+    color: '#ddb52f',
     textAlign: 'center',
     borderWidth: 2,
-    borderColor: '#ddb20f',
+    borderColor: '#ddb52f',
     padding: 12,
   },
 });
