@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import NumberContainer from '../components/game/NumberContainer';
 import Card from '../components/ui/Card';
@@ -13,12 +13,18 @@ let maxBoundary = 100;
 export default function GameScreen({ userNumber, onGameOver }) {
   const initialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
       onGameOver();
     }
   }, [currentGuess, userNumber, onGameOver]);
+
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+  }, []);
 
   // 이전 숫자보다 작다면 '작아요ㅠ' 라는 문자열
   // 이전 숫자보다 크다면 '크네요!!' 라는 문자열
@@ -38,6 +44,7 @@ export default function GameScreen({ userNumber, onGameOver }) {
 
     const nextRandomNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess);
     setCurrentGuess(nextRandomNumber);
+    setGuessRounds((prevGuessRounds) => [nextRandomNumber, ...prevGuessRounds]);
   };
 
   return (
@@ -59,7 +66,11 @@ export default function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
-      {/* <View>게임 로그</View> */}
+      <View>
+        {guessRounds.map((guessRound) => (
+          <Text key={guessRound}>{guessRound}</Text>
+        ))}
+      </View>
     </View>
   );
 }
