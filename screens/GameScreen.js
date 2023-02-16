@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import NumberContainer from '../components/game/NumberContainer';
+import Card from '../components/ui/Card';
+import InstructionText from '../components/ui/InstructionText';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Title from '../components/ui/Title';
-import Colors from '../constants/colors';
 
 let minBoundary = 1;
 let maxBoundary = 100;
@@ -42,13 +43,17 @@ export default function GameScreen({ userNumber, onGameOver }) {
     <View style={styles.screen}>
       <Title>업 & 다운 숫자 게임</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View>
-        <Text>클까요? 작을까요?</Text>
-        <View>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, '크네요!!')}>+</PrimaryButton>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, '작아요ㅠ')}>-</PrimaryButton>
+      <Card>
+        <InstructionText style={styles.instructionText}>클까요? 작을까요?</InstructionText>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, '크네요!!')}>+</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, '작아요ㅠ')}>-</PrimaryButton>
+          </View>
         </View>
-      </View>
+      </Card>
       {/* <View>게임 로그</View> */}
     </View>
   );
@@ -59,14 +64,14 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 12,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: Colors.accent500,
-    textAlign: 'center',
-    borderWidth: 2,
-    borderColor: Colors.accent500,
-    padding: 12,
+  instructionText: {
+    marginBottom: 12,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+  },
+  buttonContainer: {
+    flex: 1,
   },
 });
 
